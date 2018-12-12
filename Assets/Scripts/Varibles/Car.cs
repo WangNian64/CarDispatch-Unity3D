@@ -15,7 +15,7 @@ public class Car{
     public WorkState workState;
     public float speed;
     public TrailerGraph.Edge carEdge;//小车所在的边的信息
-    public float angled;//若小车在曲线上，该变量表示小车在曲线上的角度
+    public float angled;//若小车在曲线上，该变量表示小车在曲线上的角度  
     public Car()
     {
 
@@ -58,3 +58,4 @@ public class Car{
         }
     }
 }
+

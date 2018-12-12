@@ -9,6 +9,7 @@ public enum LineType
 //轨道有向图的拓扑结构信息
 public class TrailerGraph {
     //边
+    [System.Serializable]
     public struct Edge
     {
         public int vertexNum1;//边的点序号1
@@ -51,7 +52,7 @@ public class TrailerGraph {
         public PathData()
         {
             this.shortLength = GlobalVaribles.INFINITY;
-            this.pathList = new List<Vertex>();
+            this.pathList = new List<Vertex>(100);
         }
         public PathData(float shortLength, List<Vertex> pathList)
         {

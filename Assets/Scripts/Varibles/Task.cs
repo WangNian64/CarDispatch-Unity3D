@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //一次任务包括取货和放货两个过程
-[System.Serializable]
 public class Task{
     public Vector3 loadGoodsPos;
     public Vector3 unloadGoodsPos;
@@ -12,9 +11,7 @@ public class Task{
     public float loadTime = 1.0f;
     public float unloadTime = 1.0f;
     public Task()
-    {
-
-    }
+    { }
     public Task(Vector3 loadGoodsPos, Vector3 unloadGoodsPos, TrailerGraph.Edge loadGoods_Edge,
         TrailerGraph.Edge unloadGoods_Edge, float loadTime = 1.0f, float unloadTime = 1.0f)
     {
@@ -29,6 +26,7 @@ public class Task{
     {
         Debug.Log(loadGoodsPos + ", " + unloadGoodsPos);
     }
+    //防止引用
     public Task Clone()
     {
         if (this == null)
@@ -45,5 +43,15 @@ public class Task{
             );
             return task;
         }
+    }
+
+    public bool ContentEqual(Task t)
+    {
+        return (loadGoodsPos.Equals(t.loadGoodsPos)) &&
+            (unloadGoodsPos.Equals(t.unloadGoodsPos)) &&
+            (loadGoods_Edge.Equals(t.loadGoods_Edge)) &&
+            (unloadGoods_Edge.Equals(t.unloadGoods_Edge)) &&
+            (loadTime.Equals(t.loadTime)) &&
+            (unloadTime.Equals(t.unloadTime));
     }
 }

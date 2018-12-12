@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 29852985}
   m_Layer: 0
-  m_Name: ScriptContaimer
+  m_Name: ScriptContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

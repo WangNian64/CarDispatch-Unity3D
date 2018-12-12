@@ -8,17 +8,18 @@ public class MainController : MonoBehaviour
     //实际分配的车和任务
     private List<Car> trueCars;
     private List<Task> trueTasks;
+ 
     // Use this for initialization
     void Awake()
     {
 
     }
     // Update is called once per frame
-    void Update() 
+    void FixedUpdate() 
     {
         trueCars = new List<Car>();
         trueTasks = new List<Task>();
-        //清空还可以分配的任务,重新分配
+        //重新分配任务，先清空已经分配的任务
         foreach (Car car in GlobalVaribles.car_list)
         {
             CarController cc = GameObject.Find(car.carName).gameObject.GetComponent<CarController>();
@@ -27,6 +28,8 @@ public class MainController : MonoBehaviour
                 cc.task = null;
             }
         }
+        //对于已经在loading和unloading的，也要考虑
+
         if (GlobalVaribles.allocableTasks.Count > 0 && GlobalVaribles.allocableCars.Count > 0)
         {
             //Task>=Car
@@ -44,6 +47,10 @@ public class MainController : MonoBehaviour
 
                 //计算matchList中的最小匹配minMatch
                 Dictionary<Car, Task> minMatch = new Dictionary<Car, Task>();
+                if (GlobalVaribles.allocableTasks.Count == 1 && GlobalVaribles.allocableCars.Count == 1)
+                {
+                    Debug.Log("");
+                }
                 float minTime = getMinMatch(matchList, ref minMatch);
                 //给小车分配任务
                 DistributeTasks(minMatch);
@@ -169,26 +176,33 @@ public class MainController : MonoBehaviour
         int i = 0;
         foreach (KeyValuePair<Car, Task> kvp in match)
         {
-            allSCC[i] = new SimuCarController(kvp.Key, kvp.Value, GlobalVaribles.moveSpeed,
+            allSCC[i] = new SimuCarController(kvp.Key.Clone(), kvp.Value.Clone(), GlobalVaribles.moveSpeed,
                 GlobalVaribles.trailerGraph.curveRadius, GlobalVaribles.safeDis);
             i++;
         }
         while (unFinishNum > 0)
         {
-            foreach (SimuCarController scc in allSCC)
+            //for (int j = 0; j < 500; j++)
+            //{
+                foreach (SimuCarController scc in allSCC)
             {
-                scc.SimuUpdate();
-                if (unFinishNum <= 0)
-                {
-                    return completeTime;
-                }
                 if (scc.task == null)
                 {
                     unFinishNum--;
                 }
+                if (unFinishNum <= 0)
+                {
+                    if (GlobalVaribles.allocableCars.Count == 2 && GlobalVaribles.allocableTasks.Count == 1)
+                    {
+                        Debug.Log("完成时间" + completeTime + ", 小车" + allSCC[0].carMessage.carName);
+                    }
+                    return completeTime;
+                }
+                scc.SimuUpdate();
             }
             completeTime += GlobalVaribles.frameTime;
         }
+        //}
         return completeTime;
     }
     //得到matchList中的时间最小Match, 返回最小match对应的时间, count是每个match的车或任务的数目
@@ -228,7 +242,6 @@ public class MainController : MonoBehaviour
             car.GetComponent<CarController>().task = task;
         }
     }
-    //
 }
 
 //问题：在模拟计算时carMessage不能修改

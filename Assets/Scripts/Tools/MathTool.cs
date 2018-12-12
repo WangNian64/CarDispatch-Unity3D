@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 public class MathTool<T>
 {
+    #region //排列组合算法
     /// <summary>
     /// 交换两个变量
     /// </summary>
@@ -143,4 +143,7 @@ public class MathTool<T>
         GetCombination(ref list, t, t.Length, n, temp, n);
         return list;
     }
+    #endregion
+    
+
 }

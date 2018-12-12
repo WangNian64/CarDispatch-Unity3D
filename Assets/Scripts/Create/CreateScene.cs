@@ -26,7 +26,7 @@ public class CreateScene : MonoBehaviour {
         //轨道参数
         GlobalVaribles.trailer_Para = new GlobalVaribles.Trailer_Para("Trailer", lineLength, inCurveRadius, outCurveRadius, trailerSize);
         //内轨道曲线参数
-        float trailerHighPos = GlobalVaribles.trailer_Para.trailerSize.y / 2;//离地高度
+        float trailerHighPos = GlobalVaribles.trailer_Para.trailerSize.y / 2;//轨道离地高度
         GlobalVaribles.in_curve_Para_list = new List<GlobalVaribles.Curve_Para>();
         GlobalVaribles.in_curve_Para_list.Add(new GlobalVaribles.Curve_Para
             (-90.0f, 90.0f, GlobalVaribles.trailer_Para.inCurveRadius, new Vector3(0, trailerHighPos, lineLength), GlobalVaribles.trailer_Para.trailerSize, "UpCurve_in"));
@@ -92,12 +92,50 @@ public class CreateScene : MonoBehaviour {
         Vector3 carSize = new Vector3(trailerWidth, trailerWidth, trailerWidth);
         float carHighPos = trailerSize.y + carSize.y / 2;
         GlobalVaribles.car_list = new List<Car>();
-        GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(10, carHighPos, lineLength), carSize, Color.yellow,
-            WorkState.Empty, 0, GlobalVaribles.edges[1], 0));
-        GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(0, carHighPos, -(lineLength + centerRadius)), carSize, Color.black,
-            WorkState.Empty, 0, GlobalVaribles.edges[3], 180));
-        GlobalVaribles.car_list.Add(new Car("Car3", new Vector3(-10, carHighPos, 0), carSize, Color.red,
+
+        #region //测试1
+        //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(10, carHighPos, lineLength), carSize, Color.yellow,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[1], 0));
+        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(0, carHighPos, -(lineLength + centerRadius)), carSize, Color.black,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[3], 180));
+        //GlobalVaribles.car_list.Add(new Car("Car3", new Vector3(-10, carHighPos, 0), carSize, Color.red,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[5], 0));
+        #endregion
+
+        #region //测试2
+        //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, lineLength + centerRadius), carSize, Color.yellow,
+        //   WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
+        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(0, carHighPos, -(lineLength + centerRadius)), carSize, Color.black,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[3], 180));
+        #endregion
+
+        #region //测试3
+        //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, lineLength + centerRadius), carSize, Color.yellow,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
+        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(-10, carHighPos, lineLength), carSize, Color.black,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[0], -90));
+        #endregion
+
+        #region //测试4
+        //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, lineLength + centerRadius), carSize, Color.yellow,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
+        #endregion
+
+        #region //测试5
+        GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, lineLength + centerRadius), carSize, Color.yellow,
+            WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
+        GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(-10, carHighPos, 15), carSize, Color.black,
             WorkState.Empty, 0, GlobalVaribles.edges[5], 0));
+        #endregion
+
+        #region //测试6
+        //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, -30), carSize, Color.yellow,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[3], 180));
+        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(-10, carHighPos, -10), carSize, Color.black,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[4], 0));
+        //GlobalVaribles.car_list.Add(new Car("Car3", new Vector3(0, carHighPos, 30), carSize, Color.red,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
+        #endregion
     }
     //生成整个轨道模型
     public void CreateTrailer(GlobalVaribles.Trailer_Para trailer_Para)

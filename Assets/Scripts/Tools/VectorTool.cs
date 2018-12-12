@@ -19,7 +19,7 @@ public class VectorTool{
     {
         return new Vector3((v1.x + v2.x) / 2, (v1.y + v2.y) / 2, (v1.z + v2.z) / 2);
     }
-    //得到2向量之间的角度
+    //得到两个向量之间的角度
     public static float get2VectorAngle(Vector3 from_, Vector3 to_)
     {
         Vector3 v3 = Vector3.Cross(from_, to_);
@@ -35,6 +35,7 @@ public class VectorTool{
         float dist = Vector3.Distance(v1, v2);
         return dist <= speed * GlobalVaribles.frameTime;
     }
+    //打印Vector3
     public static void printVector3(Vector3 v)
     {
         Debug.Log(v.x + ", " + v.y + ", " + v.z);

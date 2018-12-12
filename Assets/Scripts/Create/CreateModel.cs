@@ -58,4 +58,23 @@ public class CreateModel {
         carCube.AddComponent<CarController>();
         return carCube;
     }
+    //生成任务点标记，便于测试
+    public static void CreateTaskPoint(Task task)
+    {
+        if (task != null)
+        {
+            GameObject loadPoint = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            loadPoint.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            //Color color = ModelTool.getRandomColor();
+            Color color = Color.black;
+            loadPoint.GetComponent<MeshRenderer>().material.color = color;
+            loadPoint.transform.localPosition = task.loadGoodsPos;
+
+            GameObject unloadPoint = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            unloadPoint.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            unloadPoint.GetComponent<MeshRenderer>().material.color = color;
+            unloadPoint.transform.localPosition = task.unloadGoodsPos;
+        }
+    }
+
 }

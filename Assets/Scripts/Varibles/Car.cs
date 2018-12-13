@@ -34,7 +34,7 @@ public class Car{
     }
     public void toString()
     {
-        Debug.Log(carName + ", " + carPos + ", " + carEdge.vertexNum1 + ", " + carEdge.vertexNum2 + ", " + workState);
+        Debug.Log(carName + ", " + carPos + ", (" + carEdge.vertexNum1 + ", " + carEdge.vertexNum2 + "), " + workState);
     }
     public Car Clone()
     {

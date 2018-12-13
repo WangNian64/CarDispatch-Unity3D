@@ -4,6 +4,7 @@ using UnityEngine;
 
 //一次任务包括取货和放货两个过程
 public class Task{
+    public int taskID;
     public Vector3 loadGoodsPos;
     public Vector3 unloadGoodsPos;
     public TrailerGraph.Edge loadGoods_Edge;
@@ -12,9 +13,10 @@ public class Task{
     public float unloadTime = 1.0f;
     public Task()
     { }
-    public Task(Vector3 loadGoodsPos, Vector3 unloadGoodsPos, TrailerGraph.Edge loadGoods_Edge,
+    public Task(int taskID, Vector3 loadGoodsPos, Vector3 unloadGoodsPos, TrailerGraph.Edge loadGoods_Edge,
         TrailerGraph.Edge unloadGoods_Edge, float loadTime = 1.0f, float unloadTime = 1.0f)
     {
+        this.taskID = taskID;
         this.loadGoodsPos = loadGoodsPos;
         this.unloadGoodsPos = unloadGoodsPos;
         this.loadGoods_Edge = loadGoods_Edge;
@@ -34,6 +36,7 @@ public class Task{
         else
         {
             Task task = new Task(
+                this.taskID,
                 this.loadGoodsPos,
                 this.unloadGoodsPos,
                 this.loadGoods_Edge,
@@ -47,7 +50,9 @@ public class Task{
 
     public bool ContentEqual(Task t)
     {
-        return (loadGoodsPos.Equals(t.loadGoodsPos)) &&
+        return 
+            (taskID.Equals(t.taskID)) &&
+            (loadGoodsPos.Equals(t.loadGoodsPos)) &&
             (unloadGoodsPos.Equals(t.unloadGoodsPos)) &&
             (loadGoods_Edge.Equals(t.loadGoods_Edge)) &&
             (unloadGoods_Edge.Equals(t.unloadGoods_Edge)) &&

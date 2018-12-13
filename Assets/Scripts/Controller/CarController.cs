@@ -30,7 +30,8 @@ public class CarController : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void FixedUpdate ()     {
+	void FixedUpdate ()
+    {
         if (carPathData != null)//防止循环从0->0
         {
             if (carPathData.pathList[0].index == carPathData.pathList[1].index)
@@ -129,7 +130,19 @@ public class CarController : MonoBehaviour {
                     }
                 }
                 GlobalVaribles.allocableCars.Remove(carToRemove);
-                GlobalVaribles.allocableTasks.Remove(task);
+
+                Task taskRemoveALLT = new Task();
+                foreach (Task t in GlobalVaribles.allocableTasks)
+                {
+                    if (t.taskID == task.taskID)
+                    {
+                        taskRemoveALLT = t;
+                    }
+                }
+                GlobalVaribles.allocableTasks.Remove(taskRemoveALLT);
+
+                //更新UnAllocableMatch
+                GlobalVaribles.UnAllocableMatch.Add(carMessage, task);
             } else {
                 gotoPos(task.loadGoodsPos);
             }
@@ -226,10 +239,6 @@ public class CarController : MonoBehaviour {
     public void gotoPos(Vector3 position)
     {
         position.y = transform.localPosition.y;
-        if(transform.localPosition.z <= 10.2)
-        {
-            Debug.Log("");
-        }
         if (!VectorTool.IsCloseEnough(position, transform.localPosition, carMessage.speed))
         {
             //判断车在直线还是曲线
@@ -277,11 +286,37 @@ public class CarController : MonoBehaviour {
             carMessage.workState = WorkState.Empty;
             speedChangeable = true;
             carMessage.speed = 0.0f;
+            
+            //任务完成，变为白色
+            GameObject taskLoadPoint = GameObject.Find("Task" + task.taskID + "_loadPoint");
+            GameObject taskUnLoadPoint = GameObject.Find("Task" + task.taskID + "_unloadPoint");
+            taskLoadPoint.GetComponent<MeshRenderer>().material.color =
+                taskUnLoadPoint.GetComponent<MeshRenderer>().material.color = Color.white;
             //去除该任务
-            GlobalVaribles.allTasks.Remove(task);
-            task = null;//清空任务
-            carPathData = null;     
+            Task taskToRemove = new Task();
+            foreach (Task t in GlobalVaribles.allTasks)
+            {
+                if (t.taskID == task.taskID)
+                {
+                    taskToRemove = t;
+                }
+            }
+            GlobalVaribles.allTasks.Remove(taskToRemove);
+
+            KeyValuePair<Car, Task> kvpToRemove = new KeyValuePair<Car, Task>();
+            foreach (KeyValuePair<Car, Task> kvp in GlobalVaribles.UnAllocableMatch)
+            {
+                if (kvp.Key.carName == carMessage.carName)
+                {
+                    kvpToRemove = kvp;
+                }
+            }
+            GlobalVaribles.UnAllocableMatch.Remove(kvpToRemove.Key);//删除UnAllocableMatch对应项
             GlobalVaribles.allocableCars.Add(carMessage);//小车重新可分配
+
+
+            task = null;//清空任务
+            carPathData = null;
         }
     }
     //避免碰撞

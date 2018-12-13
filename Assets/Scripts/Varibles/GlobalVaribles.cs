@@ -69,12 +69,14 @@ public class GlobalVaribles{
     public static List<Car> allCars = new List<Car>();//所有小车
     public static List<Car> allocableCars = new List<Car>();//所有可分配的车的信息数组
     public static List<Task> allocableTasks = new List<Task>();//所有可分配的任务
+    public static Dictionary<Car, Task> UnAllocableMatch = new Dictionary<Car, Task>();//存储当前所有已经不可再分配的Car-Task对
+
 
     public static float safeDis = 2.0f;//安全距离
     public static float moveSpeed = 5.0f;//规定的小车的移动速度，加速的话可以不一样
     public static float frameTime = 0.02f;//每帧时间，用于模拟计算任务完成总时间
     
-    //模式1：若本车速度》目标车速度，减速
+    //模式1：若本车速度>目标车速度，减速
     //模式2：看小车之间的前后关系。
     //模式3：不变
     //empty waytoload loading waytounload unloading

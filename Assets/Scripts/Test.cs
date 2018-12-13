@@ -8,34 +8,42 @@ public class Test : MonoBehaviour {
 	void Start () {
         Vector3 trailerSize = GlobalVaribles.trailer_Para.trailerSize;
         #region //测试1
-        //Task t1 = new Task(
-        //    new Vector3(10, trailerSize.y, 15),
-        //    new Vector3(10, trailerSize.y, 5),
-        //    GlobalVaribles.edges[1],
-        //    GlobalVaribles.edges[1]
-        //);
-        //Task t2 = new Task(
-        //    new Vector3(-10, trailerSize.y, -15),
-        //    new Vector3(-10, trailerSize.y, -5),
-        //    GlobalVaribles.edges[4],
-        //    GlobalVaribles.edges[4]
-        //);
-        //Task t3 = new Task(
-        //    new Vector3(-10, trailerSize.y, 5),
-        //    new Vector3(-10, trailerSize.y, 15),
-        //    GlobalVaribles.edges[5],
-        //    GlobalVaribles.edges[5]
-        //);
-        //GlobalVaribles.allTasks.Add(t1);
-        //GlobalVaribles.allocableTasks.Add(t1);
-        //GlobalVaribles.allTasks.Add(t2);
-        //GlobalVaribles.allocableTasks.Add(t2);
-        //GlobalVaribles.allTasks.Add(t3);
-        //GlobalVaribles.allocableTasks.Add(t3);
+        Task t1 = new Task(
+            1,
+            new Vector3(10, trailerSize.y, 15),
+            new Vector3(10, trailerSize.y, 5),
+            GlobalVaribles.edges[1],
+            GlobalVaribles.edges[1]
+        );
+        Task t2 = new Task(
+            2,
+            new Vector3(-10, trailerSize.y, -15),
+            new Vector3(-10, trailerSize.y, -5),
+            GlobalVaribles.edges[4],
+            GlobalVaribles.edges[4]
+        );
+        Task t3 = new Task(
+            3,
+            new Vector3(-10, trailerSize.y, 5),
+            new Vector3(-10, trailerSize.y, 15),
+            GlobalVaribles.edges[5],
+            GlobalVaribles.edges[5]
+        );
+        GlobalVaribles.allTasks.Add(t1);
+        GlobalVaribles.allocableTasks.Add(t1);
+        GlobalVaribles.allTasks.Add(t2);
+        GlobalVaribles.allocableTasks.Add(t2);
+        GlobalVaribles.allTasks.Add(t3);
+        GlobalVaribles.allocableTasks.Add(t3);
+        foreach (Task t in GlobalVaribles.allTasks)
+        {
+            CreateModel.CreateTaskPoint(t);
+        }
         #endregion
 
         #region //测试2
         //Task t1 = new Task(
+        //    1,
         //    new Vector3(10, trailerSize.y, -10),
         //    new Vector3(-10, trailerSize.y, -10),
         //    GlobalVaribles.edges[2],
@@ -43,16 +51,22 @@ public class Test : MonoBehaviour {
         //);
         //GlobalVaribles.allTasks.Add(t1);
         //GlobalVaribles.allocableTasks.Add(t1);
+        //foreach (Task t in GlobalVaribles.allTasks)
+        //{
+        //    CreateModel.CreateTaskPoint(t);
+        //}
         #endregion
 
         #region //测试3 2任务2车，测试碰撞避让
         //Task t1 = new Task(
+        //    1,
         //    new Vector3(10, trailerSize.y, 10),
         //    new Vector3(10, trailerSize.y, -10),
         //    GlobalVaribles.edges[1],
         //    GlobalVaribles.edges[2]
         //);
         //Task t2 = new Task(
+        //    2,
         //    new Vector3(-10, trailerSize.y, -10),
         //    new Vector3(-10, trailerSize.y, 10),
         //    GlobalVaribles.edges[4],
@@ -70,6 +84,7 @@ public class Test : MonoBehaviour {
 
         #region//测试4 让小车会选择最短路径
         //Task t1 = new Task(
+        //    1,
         //    new Vector3(-10, trailerSize.y, 5),
         //    new Vector3(-10, trailerSize.y, 15),
         //    GlobalVaribles.edges[5],
@@ -84,42 +99,47 @@ public class Test : MonoBehaviour {
         #endregion
 
         #region //测试5 可以看出动态的任务分配
-        Task t1 = new Task(
-            new Vector3(10, trailerSize.y, 10),
-            new Vector3(10, trailerSize.y, -10),
-            GlobalVaribles.edges[1],
-            GlobalVaribles.edges[2]
-        );
-        Task t2 = new Task(
-            new Vector3(-10, trailerSize.y, -10),
-            new Vector3(-10, trailerSize.y, 10),
-            GlobalVaribles.edges[4],
-            GlobalVaribles.edges[5]
-        );
-        GlobalVaribles.allTasks.Add(t1);
-        GlobalVaribles.allocableTasks.Add(t1);
-        GlobalVaribles.allTasks.Add(t2);
-        GlobalVaribles.allocableTasks.Add(t2);
-        foreach (Task t in GlobalVaribles.allTasks)
-        {
-            CreateModel.CreateTaskPoint(t);
-        }
+        //Task t1 = new Task(
+        //    1,
+        //    new Vector3(10, trailerSize.y, 10),
+        //    new Vector3(10, trailerSize.y, -10),
+        //    GlobalVaribles.edges[1],
+        //    GlobalVaribles.edges[2]
+        //);
+        //Task t2 = new Task(
+        //    2,
+        //    new Vector3(-10, trailerSize.y, -10),
+        //    new Vector3(-10, trailerSize.y, 10),
+        //    GlobalVaribles.edges[4],
+        //    GlobalVaribles.edges[5]
+        //);
+        //GlobalVaribles.allTasks.Add(t1);
+        //GlobalVaribles.allocableTasks.Add(t1);
+        //GlobalVaribles.allTasks.Add(t2);
+        //GlobalVaribles.allocableTasks.Add(t2);
+        //foreach (Task t in GlobalVaribles.allTasks)
+        //{
+        //    CreateModel.CreateTaskPoint(t);
+        //}
         #endregion
 
         #region //测试6 三车三任务
         //Task t1 = new Task(
+        //    1,
         //    new Vector3(-10, trailerSize.y, 5),
         //    new Vector3(-10, trailerSize.y, 15),
         //    GlobalVaribles.edges[5],
         //    GlobalVaribles.edges[5]
         //);
         //Task t2 = new Task(
+        //    2,
         //    new Vector3(10, trailerSize.y, 15),
         //    new Vector3(10, trailerSize.y, 5),
         //    GlobalVaribles.edges[1],
         //    GlobalVaribles.edges[1]
         //);
         //Task t3 = new Task(
+        //    3,
         //    new Vector3(10, trailerSize.y, -5),
         //    new Vector3(10, trailerSize.y, -15),
         //    GlobalVaribles.edges[2],
@@ -131,6 +151,22 @@ public class Test : MonoBehaviour {
         //GlobalVaribles.allocableTasks.Add(t2);
         //GlobalVaribles.allTasks.Add(t3);
         //GlobalVaribles.allocableTasks.Add(t3);
+        //foreach (Task t in GlobalVaribles.allTasks)
+        //{
+        //    CreateModel.CreateTaskPoint(t);
+        //}
+        #endregion
+
+        #region //测试7 
+        //Task t1 = new Task(
+        //    1,
+        //    new Vector3(10, trailerSize.y, 10),
+        //    new Vector3(10, trailerSize.y, -10),
+        //    GlobalVaribles.edges[1],
+        //    GlobalVaribles.edges[2]
+        //);
+        //GlobalVaribles.allTasks.Add(t1);
+        //GlobalVaribles.allocableTasks.Add(t1);
         //foreach (Task t in GlobalVaribles.allTasks)
         //{
         //    CreateModel.CreateTaskPoint(t);

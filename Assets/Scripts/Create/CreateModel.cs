@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CreateModel {
     //生成曲线轨道模型
@@ -69,11 +71,15 @@ public class CreateModel {
             Color color = Color.black;
             loadPoint.GetComponent<MeshRenderer>().material.color = color;
             loadPoint.transform.localPosition = task.loadGoodsPos;
+            loadPoint.AddComponent<Text>().text = Convert.ToString(task.taskID);
+            loadPoint.name = "Task" + task.taskID + "_loadPoint";
 
             GameObject unloadPoint = GameObject.CreatePrimitive(PrimitiveType.Cube);
             unloadPoint.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
             unloadPoint.GetComponent<MeshRenderer>().material.color = color;
             unloadPoint.transform.localPosition = task.unloadGoodsPos;
+            unloadPoint.AddComponent<Text>().text = Convert.ToString(task.taskID);
+            unloadPoint.name = "Task" + task.taskID + "_unloadPoint";
         }
     }
 

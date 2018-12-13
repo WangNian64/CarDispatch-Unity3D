@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 //模拟小车
 //信息和CarController一致
 //不同在于更新的是carMessage的carPos位置
@@ -17,7 +17,7 @@ public class SimuCarController {
     private float unloadAccumuTime;//累计卸货时间
     private TrailerGraph.PathData carPathData;//小车到某个点的最短路径数据
 
-    public bool speedChangeable;
+    public bool speedChangeable;//速度是否可变
     //public bool SpeedChangeable
     //{
     //    get { return speedChangeable; }
@@ -268,11 +268,12 @@ public class SimuCarController {
     //模拟小车的旋转运动
     public void SimuRotateAround(float curveRadius, Vector3 rotateCenter, float lineSpeed)
     {
-        float angularSpeed = lineSpeed / curveRadius;//计算角速度
+        float angularSpeed = lineSpeed / curveRadius;//计算角速度 radian
+        //deg是角度，radian是弧度
         //累计的角度（每次进入曲线轨道，都要给小车一个新的初始角度）
-        carMessage.angled += angularSpeed % (2 * Mathf.PI);
-        float posX = rotateCenter.x + curveRadius * Mathf.Sin(carMessage.angled);
-        float posZ = rotateCenter.z + curveRadius * Mathf.Cos(carMessage.angled);
+        carMessage.angled += (Mathf.Rad2Deg * angularSpeed) % 360;
+        float posX = rotateCenter.x + curveRadius * Mathf.Sin(carMessage.angled * Mathf.Deg2Rad);
+        float posZ = rotateCenter.z + curveRadius * Mathf.Cos(carMessage.angled * Mathf.Deg2Rad);
         //更新carPos
         carMessage.carPos = new Vector3(posX, carMessage.carPos.y, posZ);
     }
@@ -291,20 +292,17 @@ public class SimuCarController {
     public void SimuAvoidCrash()
     {
         bool noOther = true;
-        //得到所有小车
-        List<Car> carList = GlobalVaribles.allCars;
-        //查找本小车附近的小车
-        foreach (Car car in carList)//遍历其他所有小车
+        if (MainController.allSCC != null)
         {
-            //是其他小车
-            if (car.carName != carMessage.carName)
+            foreach (SimuCarController scc in MainController.allSCC)
             {
-                noOther = false;
-                //若其他小车距离本车过近,修改速度
-                if (Vector3.Distance(car.carPos, carMessage.carPos) <= safeDis)
+                if (scc.carMessage.carName != carMessage.carName)//是其他小车
                 {
-                    //修改小车速度
-                    SimuChangeSpeed(car);
+                    noOther = false;
+                    if (Vector3.Distance(scc.carMessage.carPos, carMessage.carPos) <= safeDis)//若其他小车距离本车过近,修改速度
+                    {
+                        SimuChangeSpeed(scc.carMessage);//修改小车速度
+                    }
                 }
             }
         }

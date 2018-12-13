@@ -94,25 +94,25 @@ public class CreateScene : MonoBehaviour {
         GlobalVaribles.car_list = new List<Car>();
 
         #region //测试1
-        //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(10, carHighPos, lineLength), carSize, Color.yellow,
-        //    WorkState.Empty, 0, GlobalVaribles.edges[1], 0));
-        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(0, carHighPos, -(lineLength + centerRadius)), carSize, Color.black,
-        //    WorkState.Empty, 0, GlobalVaribles.edges[3], 180));
-        //GlobalVaribles.car_list.Add(new Car("Car3", new Vector3(-10, carHighPos, 0), carSize, Color.red,
-        //    WorkState.Empty, 0, GlobalVaribles.edges[5], 0));
+        GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(10, carHighPos, lineLength), carSize, Color.yellow,
+            WorkState.Empty, 0, GlobalVaribles.edges[1], 0));
+        GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(0, carHighPos, -(lineLength + centerRadius)), carSize, Color.green,
+            WorkState.Empty, 0, GlobalVaribles.edges[3], 180));
+        GlobalVaribles.car_list.Add(new Car("Car3", new Vector3(-10, carHighPos, 0), carSize, Color.red,
+            WorkState.Empty, 0, GlobalVaribles.edges[5], 0));
         #endregion
 
         #region //测试2
         //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, lineLength + centerRadius), carSize, Color.yellow,
         //   WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
-        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(0, carHighPos, -(lineLength + centerRadius)), carSize, Color.black,
+        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(0, carHighPos, -(lineLength + centerRadius)), carSize, Color.red,
         //    WorkState.Empty, 0, GlobalVaribles.edges[3], 180));
         #endregion
 
         #region //测试3
         //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, lineLength + centerRadius), carSize, Color.yellow,
         //    WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
-        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(-10, carHighPos, lineLength), carSize, Color.black,
+        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(-10, carHighPos, lineLength), carSize, Color.red,
         //    WorkState.Empty, 0, GlobalVaribles.edges[0], -90));
         #endregion
 
@@ -122,19 +122,26 @@ public class CreateScene : MonoBehaviour {
         #endregion
 
         #region //测试5
-        GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, lineLength + centerRadius), carSize, Color.yellow,
-            WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
-        GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(-10, carHighPos, 15), carSize, Color.black,
-            WorkState.Empty, 0, GlobalVaribles.edges[5], 0));
+        //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, lineLength + centerRadius), carSize, Color.yellow,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
+        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(-10, carHighPos, 15), carSize, Color.red,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[5], 0));
         #endregion
 
         #region //测试6
         //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, -30), carSize, Color.yellow,
         //    WorkState.Empty, 0, GlobalVaribles.edges[3], 180));
-        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(-10, carHighPos, -10), carSize, Color.black,
+        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(-10, carHighPos, -10), carSize, Color.green,
         //    WorkState.Empty, 0, GlobalVaribles.edges[4], 0));
         //GlobalVaribles.car_list.Add(new Car("Car3", new Vector3(0, carHighPos, 30), carSize, Color.red,
         //    WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
+        #endregion
+
+        #region //测试7
+        //GlobalVaribles.car_list.Add(new Car("Car1", new Vector3(0, carHighPos, lineLength + centerRadius), carSize, Color.yellow,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[0], 0));
+        //GlobalVaribles.car_list.Add(new Car("Car2", new Vector3(-10, carHighPos, 15), carSize, Color.red,
+        //    WorkState.Empty, 0, GlobalVaribles.edges[5], 0));
         #endregion
     }
     //生成整个轨道模型
